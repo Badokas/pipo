@@ -1,0 +1,187 @@
+cmake_minimum_required(VERSION 3.15)
+# set(CMAKE_CXX_STANDARD 11)
+
+set(PROJECT_NAME "pipo")
+project("${PROJECT_NAME}" LANGUAGES C VERSION 1.0.0)
+
+# set(PIPOSDK_DIR ${CMAKE_CURRENT_SOURCE_DIR}/sdk)
+# set(RTA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/modules/rta)
+
+# file(GLOB PIPO_HEADERS
+# 		# ${PIPOSDK_DIR}/include/PiPo.h
+# 		# ${PIPOSDK_DIR}/include/PiPoParallel.h
+# 		# ${PIPOSDK_DIR}/include/PiPoSequence.h
+# 		# ${PIPOSDK_DIR}/host/PiPoHost.h
+# 		# ${PIPOSDK_DIR}/collection/PiPoCollection.h
+# )
+
+# file(GLOB PIPO_SOURCES
+#         modules/collection/PiPoCollection.cpp
+#         ${RTA_DIR}/misc/rta_correlation.c
+#         ${RTA_DIR}/misc/rta_delta.c
+#         ${RTA_DIR}/misc/rta_mean_variance.c
+#         ${RTA_DIR}/misc/rta_yin.c
+#         ${RTA_DIR}/common/rta_bpf.c
+#         ${RTA_DIR}/common/rta_int.c
+#         ${RTA_DIR}/misc/rta_bands.c
+#         ${RTA_DIR}/misc/rta_biquad.c
+#         ${RTA_DIR}/misc/rta_dct.c
+#         ${RTA_DIR}/misc/rta_fft.c
+#         ${RTA_DIR}/misc/rta_mel.c
+#         ${RTA_DIR}/misc/rta_moments.c
+#         ${RTA_DIR}/misc/rta_onepole.c
+#         ${RTA_DIR}/misc/rta_selection.c
+#         ${RTA_DIR}/psy/psy.c
+# )
+
+# include_directories(
+# 		${RTA_DIR}
+# 		${RTA_DIR}/common
+# 		${RTA_DIR}/misc
+# 		${RTA_DIR}/psy
+# 		${RTA_DIR}/src
+# 		${RTA_DIR}/src/signal
+# 		${RTA_DIR}/src/util
+# 		${RTA_DIR}/src/statistics
+# 		# ${PIPOSDK_DIR}/include
+# 		# ${PIPOSDK_DIR}/host
+# 		# ${PIPOSDK_DIR}/collection
+# 		modules
+# 		modules/bayesfilter/src
+# 		modules/finitedifferences
+# 		#
+# 		${PIPOSDK_DIR}/src
+# 		${PIPOSDK_DIR}/src/host
+# 		#
+# 		modules/rta/bindings/lib
+# )
+
+# # target_sources()
+
+# add_library(pipo SHARED ${PIPO_SOURCES})
+
+##
+##
+##
+
+set( INCLUDE_DIRS
+	modules
+	modules/bayesfilter/src
+	modules/finitedifferences
+	modules/mimo
+)
+
+set( PUBLIC_HEADERS
+)
+
+set( PROJECT_HEADERS
+	modules/PiPoBands.h #
+	modules/PiPoBasic.h #
+	modules/PiPoBayesFilter.h #
+	modules/PiPoBiquad.h #
+	modules/PiPoBranch.h #
+	modules/PiPoChop.h # 
+	modules/PiPoConst.h #
+	modules/PiPoDct.h #
+	modules/PiPoDelta.h #
+	# modules/PiPoDescr.h
+	modules/PiPoFft.h #
+	modules/PiPoFiniteDif.h #
+	modules/PiPoGate.h #
+	modules/PiPoIdentity.h #
+	modules/PiPoLpc.h
+	# modules/PiPoIdesc.h
+	# modules/PiPoIntensity.h
+	# modules/PipoLpc.h
+	# modules/PipoLpcFormants.h
+	modules/PiPoMaximChroma.h #
+	modules/PiPoMeanStddev.h #
+	modules/PiPoMedian.h #
+	modules/PiPoMel.h #
+	modules/PiPoMfcc.h #
+	modules/PiPoMinMax.h #
+	modules/PiPoMoments.h #
+	modules/PiPoMvavrg.h #
+	modules/PiPoOnseg.h #
+	# modules/PiPoOrientation.h
+	modules/PiPoPeaks.h #
+	modules/PiPoPsy.h #
+	modules/PiPoRms.h #
+	modules/PiPoScale.h #
+	modules/PiPoSelect.h #
+	modules/PiPoSlice.h #
+	modules/PiPoSum.h #
+	modules/PiPoWavelet.h #
+	modules/PiPoYin.h #
+	modules/TempMod.h #
+	modules/bayesfilter/src/BayesianFilter.h #
+	modules/bayesfilter/src/filter_utilities.h #
+	modules/finitedifferences/finitedifferences.h #
+	modules/mimo/mimo_stats.h #
+)
+
+set( PRIVATE_HEADERS
+)
+
+set( SOURCES
+	modules/bayesfilter/src/BayesianFilter.cpp
+	modules/bayesfilter/src/filter_utilities.cpp
+	modules/collection/PiPoCollection.cpp
+	modules/finitedifferences/finitedifferences.c
+	modules/rta/src/signal/rta_bands.c
+	modules/rta/src/signal/rta_biquad.c
+	modules/rta/src/signal/rta_correlation.c
+	modules/rta/src/signal/rta_cubic.c
+	modules/rta/src/signal/rta_dct.c
+	modules/rta/src/signal/rta_delta.c
+	modules/rta/src/signal/rta_fft.c
+	modules/rta/src/signal/rta_lifter.c
+	modules/rta/src/signal/rta_lpc.c
+	modules/rta/src/signal/rta_mel.c
+	modules/rta/src/signal/rta_onepole.c
+	modules/rta/src/signal/rta_psy.c
+	modules/rta/src/signal/rta_yin.c
+	modules/rta/src/statistics/rta_mean_variance.c
+	modules/rta/src/statistics/rta_moments.c
+	modules/rta/src/statistics/rta_selection.c
+	modules/rta/src/util/rta_int.c
+	modules/rta/src/util/rta_util.c
+	sdk/src/host/PiPoHost.cpp
+)
+
+set( STATIC_DEPENDENCIES
+)
+
+set( DEPENDENCIES
+)
+
+
+##
+## Library
+##
+
+add_library( "${PROJECT_NAME}" STATIC
+${SOURCES}
+${PUBLIC_HEADERS}
+${PROJECT_HEADERS}
+${PRIVATE_HEADERS}
+${RESOURCES}
+)
+
+target_include_directories( "${PROJECT_NAME}"
+    PUBLIC
+	modules
+	modules/bayesfilter/src
+	modules/finitedifferences
+	modules/mimo
+#
+	modules/rta/bindings/lib
+	modules/rta/src
+	modules/rta/src/recognition
+	modules/rta/src/signal
+	modules/rta/src/statistics
+	modules/rta/src/util
+)
+
+# install( TARGETS "${PROJECT_NAME}" DESTINATION "lib")
+# install( FILES ${PUBLIC_HEADERS} DESTINATION "include/"${PROJECT_NAME}"")
