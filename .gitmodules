@@ -9,4 +9,4 @@
 	url = https://github.com/ircam-ismm/wavelet.git
 [submodule "modules/rta"]
 	path = modules/rta
-	url = https://badokas@github.com/Badokas/rta-lib.git
+	url = https://github.com/Badokas/rta-lib.git
